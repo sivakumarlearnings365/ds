@@ -1,0 +1,81 @@
+n/w command:
+=============
+    $ traceroute <destination? --> what route taken by packets to reach destination
+        $ tarceroute google.com 
+    $ netstat
+    $ nslookup google.com --> shows ip of URL and related info
+    $ host google.com --> similar to nslookup particular to dns
+    $ dig google.com --> provides detailed info about dns records
+
+curl vs wget
+===========
+    $ wget --> download
+    $ curl --> download & upload conent alos 
+        -> to upload use (post methos) & also to check application is running or by using below commad if its ruuning get source code else 404 error
+        $ curl https://www.google.com
+        -> for api testing also for PUT, POST
+
+        ex:
+            $ curl -o <URL> --> is is fast comapred to wget
+            $ curl -X POST <URL>.
+
+    rediretion:
+    ---------
+        $ curl -L <URL> -o filename.zip
+        $ wget --max-redirect=20 <URL>
+
+process management
+=====================
+    1- view process
+    2- control exec (start, stop, pause, remove)
+    3- terminate unreposnive 
+    4- monitoring resources
+    5- running fore/back groung
+    6- automate
+
+    lifecycle of process:
+    -----------------------
+    1- created
+    2- run ( using cpu)
+    3- sleeping(I/O)
+    4- stopping (pause, not terminating)
+    5- zombie (process terminated but still entry in tables)
+
+    $ ps --> process running in current shell
+    $ ps -e --> entire system, if TTY is ? no terminal its system realted
+    $ ps aux --> shows extra details like mem & cpu info
+    $ ps -ef --> parent & child ids 
+
+    monitoring:
+    --------------
+    $ top (dyanmic)
+        prees c --> sorts cpu info, m-> memory, k-> to kill process,
+         PR -> priority of process lower value means highest priority
+         NI -> nice value lower value means highest priority
+         VIRT -> virtual mem for swapping
+         RES -> actul physcial mem
+    $ htop -> more interactive
+
+    jobs:
+    -------
+    $ jobs
+    $ sleep 100 ( cntrl +c --> kills sleep , cntrl + z --> pause sleep)
+       $ jobs
+       to run sleep(alreday there) in foregroud or backgroubd
+       -----------------------------------
+       bg %1 (1 is id of job)
+       fg %1
+       $ sleep 100 & (starts in background)
+
+    process priority(-20 is highest & 19 is lowest, default is 0)
+    -------------------
+    $ nice -n 10 ./longjob.sh
+        to chnage priority stop process by cntrl+z 
+    $ ps aux | grep longjob.sh
+        $ renice -n 5 -p 2190
+            $ fg %1 ( 1 will get from $ jobs )
+            it will start from where it paused
+    $ nohup sleep 200 & --> it will run even if disconnected from terminal
+      $ ls /proc <PID> --> shows all process related to that PID
+    $ cat /proc/<PID>/cmdline --> shows command to start that process
+

@@ -1,0 +1,110 @@
+$ usermod -aG docker ubuntu($USER) --> current user, executes all docker related commands
+$ newgrp docker --> to apply chnages immediately
+
+$ usermod -s /bin/bash aditya
+
+$ deluser aditya
+
+$ addgroup group1
+$ delgroup group1
+
+to add anyuser to sudo group, they can use sudo command:
+    $ usermod -aG sudo syam
+
+directory structure:
+=======================
+Here's a short summary of the Linux directory structure with common use cases:
+
+/bin – Essential User Commands
+    Use: Basic commands needed for all users.
+    Example:
+        /bin/ls – lists directory contents
+        /bin/cp – copies files
+    Third-party: Usually not for third-party apps; strictly core tools.
+/sbin – System Binaries
+    Use: Admin tools used for system maintenance.
+    Example:
+        /sbin/iptables – firewall tool
+        /sbin/reboot – restarts the system
+    Third-party: Admin tools from packages like net-tools, lvm2 may install here.
+/etc – Configuration Files
+    Use: System-wide config files.
+    Example:
+        /etc/nginx/nginx.conf – NGINX config
+        /etc/ssh/sshd_config – SSH server settings
+    Third-party: Almost all third-party apps store configs here.
+        /etc/mysql/my.cnf – MySQL config
+        /etc/docker/daemon.json – Docker config
+/opt – Optional/Third-party Software
+    Use: Large third-party software packages.
+    ex: tomcat...
+/usr – Secondary Hierarchy (user apps & tools)
+IT CONATIMS FOLDER --> bin(application), lib, share(docs, icons,fomts..), local (apps installed maually)
+    Use: Non-essential software and libraries.
+    Example:
+        /usr/bin/python3 – Python binary
+        /usr/share/fonts – System fonts
+    Third-party: Many installed tools go here:
+        /usr/lib/docker/
+        /usr/bin/code – VS Code launcher
+/dev --> h/w and virtual devices
+        /dev/sda....
+/proc --> process related info
+        /proc/cpuinfo
+/sys --> kernal info
+        drivers, devices, ..
+/home --> users home directory
+    default directories are .bashrc, .bash_profile
+/boot --> boting related info
+    initrd.img
+/lib --> shared libraries of bin & sbin
+/run --> voilatile info like pid of services
+/srv --> service realted data by system services
+        /srv/ftp, /srv/www ->hosting websites
+
+
+============================================
+users realted:
+----------------
+-----------------
+    diff b/w adduser and useradd
+    -------------------------
+        adduser -> its more interactive , use while crreating manually
+        useradd -> use in scripts
+
+    groups:
+    ----------
+    $ addgroup devops
+    $ usermod -g devops siva --> for siva devops is the primary group
+    $ usermod -aG devops,infra siva --> for siva devops,infra are secondary groups
+
+    to delete users, groups:
+    ------------------------
+    $ deluser siva
+    $ delgroup devops
+
+vi editor:
+==========
+    gg -> beginning of file
+    G -> end of file
+    0 -> beginnig of current line
+    $ -> end of current line
+    w -> begiinging of nxt wrd
+    b -> begng of current wrd
+    dd -> delete current line
+    A -> inser mode at end of line
+    I -> insert mode at begng of line
+    o -> open newlinebelow current line
+
+permissions:
+===========
+    owner - u
+    group - g 
+    other - o 
+    + add 
+    - remove 
+        chmod u=rwx folder-1,  chmod g=--x -R folder-1,  chmod g+w -R folder1 
+owners:
+---------
+    chown siva -R folder-1 --> chnages only primary owner
+    chown :devops -R folder-1 --> chnages only group owner
