@@ -74,5 +74,5 @@ cases:
 -> to check where specific port is opened or not 
     $ telenet <ip> 22
 
--> to heck any specific port using by which application/user 
+-> to check any specific port using by which application/user 
      $ lsof -i :8080
