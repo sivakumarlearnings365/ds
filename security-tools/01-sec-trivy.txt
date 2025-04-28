@@ -9,6 +9,9 @@ docker
 owsasp ZAP
 //owasp dependency check --> its function is covered by trivy
 
+
+sonarqube sans vulnarabilities of source code, where as trivy and gitleaks scans vulnarabilities of dependencies
+
 Trivy: ( Triple vulnarability sacnner)
 ========================================
 1) sacn dependencies in our project
