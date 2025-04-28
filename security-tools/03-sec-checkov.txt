@@ -1,0 +1,24 @@
+checkov:
+------------
+specially used for IAC tools like aws cloud formation, terraform ...
+
+It has its own set of policies
+    it will scan file and shows what is the issue and generates code, need to chekc that code in browser 
+
+inatalltion in jenkins m/c only:
+---------------------------------
+python is reuired for this and also requires virtual env to activate this 
+
+ $ sudo apt update -y
+ $ sudo apt install python3  python3-pip python3-venv -y
+ $  pip install checkov
+
+
+commands:
+------------
+$ checkov -d . --> scans current dir 
+$ checkov -f main.conf --> to scan specific file 
+$ checkov  -d . --skip-check CKV_AWS_130,CKV_AWS_23 --> to skip any specific checks even if they fail 
+$ checkov -d . -o json > checkov-report.json 
+
+

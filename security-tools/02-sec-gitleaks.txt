@@ -1,0 +1,43 @@
+git leaks:
+----------
+trivy also svans sensitive info but git leaks sacns entire file system fo sensitive data 
+
+inatll git leaks on jenkins machine itself:
+---------------------------------------------
+$ apt install gitleaks 
+    $ gitleaks detect --source .
+    $ gitleaks detect --source . -r gitleaks-report.txt   --> expose sensitive info in report generated
+    $ gitleaks detect --source . -r gitleaks-report.txt  --redact 
+
+    sample pipeline syntax:
+    --------------------------
+            pipeline {
+                agent any
+
+                stages {
+                    stage('git clone') {
+                        steps {
+                        git branch: 'master', url: 'https://github.com/Plazmaz/leaky-repo.git'
+                        }
+                    }
+                
+                    stage('trivy-scan') {
+                        steps {
+                        sh 'trivy fs --format table -o fs-report.html .'
+                        }
+                    }
+                    
+                    stage('gitleaks-scan') {
+                        steps {
+                        sh 'gitleaks detect --source . -r b.txt --redact || true'
+                        // it takes exit as 1 to fail, 
+                        //so || true makes exit as 0 and build will success
+                        }
+                    }
+                }
+                
+            }
+    --------------------------------------------------------
+
+    
+
