@@ -1,0 +1,41 @@
+
+awk , sed, grep:
+======================
+
+awk:
+------
+    $1 -> frst clmn 
+    $2 -> seconf clmn 
+    40 -> entire line 
+ syntax:
+ ---------
+    awk '<pattern/condition> {action}' <file_name>
+    ex: $ awk '$4 > 500 {print $1, $4}' file1.txt 
+        $ awk '{ sum += $4 } END {print "total salary:", sum }' 1.txt 
+
+grep: -> filter, search, find
+-----------------------------
+ $ grep 'sales' 2.txt -> print all sales lines 
+ $ grep -v 'sa'es' 2.txt -> filter sales and print remaining lines
+ $ grep -n 'engineering' 2.txt -> prinat all eng. lines with line no.
+ $ grep -c 'newyork' 2.txt -> prints total count of word newyork 
+ $ grep -E 'sales|marketing' 2.txt -> prints wither sales or marketing lines 
+ $ grep -r 'chicago' ./*.txt -> search word recursively 
+ $ grep -w 'sales' 2.txt -> fetches exact match word 
+ $ grep '^A' 2.txt -> print all lines starting with A 
+ $ grep 'New York$' 2.txt -> print all lines ending with NewYork 
+
+
+sed: -> search and replace
+------------------------
+ $ sed -n '3p' 1.txt -> prints specifc 3rd line
+ $ sed -n '2,4p' 1.txt -> prints from 2 to 4 lines
+ $ sed  '/Maketing/d' -> delete all lines which has Marketing key word 
+ $ sed '1d' 1.txt -> deletes 1st line
+ $ sed '1i\Name Age Dept Location' 1.txt --> inserts above line1 
+ $ sed '3a\this new 3rd line' 1.txt --> appends after 3rd line.
+ $ sed 's/sales/buyers/g' 2.txt 
+ 
+
+
+

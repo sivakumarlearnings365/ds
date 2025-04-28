@@ -1,0 +1,78 @@
+n/w interface :
+================
+
+communication in details:
+--------------------------
+    OSI(open system interconnection):
+        1) physical layer
+            tranfers raw bit stream 
+        2) data link layer
+             ensures data reliable between nodes with error detection 
+        3) Newtwork layer
+            manges packets routing through different route
+        4) Transport layer 
+            end 2 end with error detection and correction , flow control and congestion(excessive data transfer)
+            protocols --> tcp, udp 
+                tcp -> connection orriented, make sure data is transfered in sequence and completely, but slow
+                        ex: mails..
+                udp -> no connection, fast and no cross check
+                    ex: video games..
+        5) session layer
+            make sure connection is established b/w sessions and terminated
+        6) presentation layer:
+            translate data b/w application layer and n/w layer, data formatting, secure, encryption & decryption
+        7) application layer:
+                supports end user , interacts with n/w for users with HTTP/HTTPS for web , SMTP/POP3 for mails,
+                FTP for files, DNS..
+
+IP ADDRS:
+==========
+0-255.0-255.0-255.0-255 --> in base forma 
+2^0-2^7.2^0-2^7.2^0-2^7.2^0-2^7 --> in binary form 
+    each slot is 8 bits 
+
+    class A: --> 1.0.0.0 - 126.255.255.255 and it has subnet of mask 8, -> 255.0.0.0
+    which means first slot is fixed (Newtwork) and remaining three slots we have  265 bits(host)
+    subnet mask is a 32 bit n/w 
+
+    class B: --> 128.0.0.0 - 191.255.255.255 /16 -0-> 255.255.0.0
+    class C: --> 192.0.0.0 - 223.255.255.255 /24 -0-> 255.255.255.0
+
+    ex:
+    192.168.1.0/24 -->  total 32 bits out of which 24 bits occupied, so 32-28 only 8 bits are avaialable, so ips we can assign is 2^8 which is 256 ips, in which we have n/w and broascast ips are there so remaining ips avialble to use are 254
+     n/w addrs -> 192.168.1.0
+     broadcast addrs -> 192.168.1.255
+     available ips are -> 192.168.1.1 - 192.168.1.254
+
+     on outline above ex:
+      192.168.1.0/24 
+        255.255.255.0 -> subnetmask
+        n/w -> 8 bits
+        ips -> 256
+    
+    ex: 192.168.1.0/26 -> 32-26=6 ; 2^6 = 64 ips, usable ips are 62 ips 
+        255.255.255.192 -> subnetmask (2^6 + 2^7 = 192)
+        n/w -> 6 bits
+        ips -> 64
+
+
+Key concepst in networ:
+=========================
+$ ip addr show 
+
+
+cases:
+==========
+-> owasp dc --> vulnarability scan(DOS) 
+    issue is not able to download report due to firewall issue.
+
+-> if a user facing issue connecting with vm, check vm HC by uinsg  $ ping <ip_addr>
+
+-> $ nslookup <ip_addr>
+        to  check server details, like this belongs to us or not
+
+-> to check where specific port is opened or not 
+    $ telenet <ip> 22
+
+-> to heck any specific port using by which application/user 
+     $ lsof -i :8080
