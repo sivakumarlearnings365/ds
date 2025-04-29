@@ -1,0 +1,30 @@
+cicd tools:
+-----------
+jenkins
+github actions
+gitlab cicd
+codepipeline
+azure pipelines
+
+Jenkins:
+=========
+    prereqs:
+    1) java
+runs on port 8080
+
+
+jenkins master-agent:
+---------------------
+even for jenkins agents java is required  
+manage jenkins -> nodes -> new node -> name:agent-1, permanent agent -> remote root directory(create path in agent with proper permissions) -> launch methos: with ssh , for credentials create under secrets and add here
+    
+if tools installed using plugins, they should be defined in pipeline to use them
+
+
+
+plugins:
+----------
+1)config file provider 
+2) eclipse temurin installer 
+    tools -> jdk -> installl from adoptium.net 
+3)stage view plugin
