@@ -16,7 +16,9 @@ Trivy: ( Triple vulnarability sacnner)
 ========================================
 1) sacn dependencies in our project
 2) sacn source code for sensitivie data
-3)scan for misconfigurations like kubernatese files 
+3) scan for misconfigurations like kubernatese files 
+4) docker images 
+5) remote git repo 
 
 
     CVE (common vulnarability & exposer)
