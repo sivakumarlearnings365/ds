@@ -17,11 +17,11 @@ Trivy: ( Triple vulnarability sacnner)
 1) sacn dependencies in our project
 2) sacn source code for sensitivie data
 3) scan for misconfigurations like kubernatese files 
-4) docker images 
-5) remote git repo 
+4) docker images -> base img vulnarabilities, outdated s/w like old versions
+5) remote git repo -> scans with out taking clone to local 
 
 
-    CVE (common vulnarability & exposer)
+    CVE (common vulnerabilities  & exposers)
     --------------------------------
     there is a common databse whre all vulnarabilities and its fixes are mentioned in database ,
     whenever we scan data with trivy, it will scan all dependencies and cross check with database and genetaes o/p. 
@@ -39,12 +39,27 @@ Trivy: ( Triple vulnarability sacnner)
     Installation:
     ==================
     -> search for trivy installation
+
+    commands:
+    ==============
+     $ trivy repo <git_repo_URL>
+     $ trivy repo --format table -o report.txt  <git_repo_url>
      $ trivy fs . --> generates reports in console 
      $ trivy fs -o report.html .
      $ trivy fs --format table -o report1.html . --> to download in specific format 
       $ trivy fs --severity HIGH,CRITICAL --format table -o report.html .
 
-    integrating with jenkins:
+      to scan files of cloned repo:
+      -------------------------------
+      after cloning repo go inside repo 
+        $ trivy fs --fromat json -o report.json .
+            (many tools redas data in json format)
+
+    different formats of trivy o/ps:
+    -------------------------------
+    table, json, template(for aws service), sarif, cyclonedx, spdx, spdx-json, github, cosign-vuln 
+
+    integrating with jenkins:(as we do not have plugin for trivy, need to install inside jenkins m/c)
     --------------------------
     -> install java-17
     -> install jenkins
