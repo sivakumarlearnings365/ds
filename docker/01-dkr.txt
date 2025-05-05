@@ -1,0 +1,43 @@
+virtualization(monolithic)
+--------------------------
+    physical server -> host os -> hypervisor ->(vm-a, vm-b) 
+    individual os with thier own libs and apps running
+containerization(micro svcs)
+-------------------------------
+    physical server -> host os -> docker -> 
+        same host os resources across all containers of docker with thier indivial libs, n/w, storage, ..
+
+
+docker components:
+===================
+
+-> docker client(cli)     
+-> docker daemon(its backend service , holding docker objevts like images, containers...)
+
+to make app portable 
+----------------------
+    1- pkg1(src+depdn)
+    2- (pkg1+env) --> dkr img 
+
+    above portable app can be implemented with help of docker file which contains steps of docker images 
+
+
+    dockerfile:
+    ------------
+    FROM
+    ENV 
+    COPY 
+    WORKDIR   -> even folder not there it cretes that folder 
+    EXPOSE  -> its not opening port just info about port on which app is running 
+    CMD["java", "-jar", "app.jar"] --> when container starts this command executes, it has two formats          1-shell, 2-exec(recommended)
+
+    cmnds:
+    ------------
+    $ docker build -t board:v1 .
+
+    tagging:
+        <user-name>/<app>:<version>  --> default version is latest
+    $ docker tag board:v1  <user-name>/<app>:<version> 
+    $ docker push <user-name>/<app>:<version> 
+
+    -------------30 mnts --------------
