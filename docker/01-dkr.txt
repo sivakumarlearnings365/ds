@@ -40,4 +40,13 @@ to make app portable
     $ docker tag board:v1  <user-name>/<app>:<version> 
     $ docker push <user-name>/<app>:<version> 
 
-    -------------30 mnts --------------
+
+docker installtion:
+====================
+    after docker installation docker group will be created which has permissions to execute docker commands.
+     $ docker
+     $ usermod -aG docker ubuntu/$USER
+     $ newgrp docker 
+
+     $ docker images 
+    -------------42 mnts --------------
