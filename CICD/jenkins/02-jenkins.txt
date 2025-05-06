@@ -1,12 +1,12 @@
 webhook triggers:
 ====================
     ex: automating pielines,
-        when developer pushes code to feature branch of git repo, then pipeline starts executing automatically and performs comilation, test, build(artifcats), security check
+        when developer pushes code to feature branch of git repo, then pipeline starts executing automatically and performs compilation, test, build(artifcats), security check
 
     configuration:
     ------------------
     install plugin -> generic webhook triggger(specific to pipeline) ,
-    now go to job -> trigger -> generic webhook trigger check it and now add post content parameters
+    now go to pipeline job -> trigger -> generic webhook trigger check it and now add post content parameters
         variable - ref
         expresiion - $.ref (json)
         token & token credentials -> both are for authrization, token is visible which is not good
@@ -19,6 +19,50 @@ webhook triggers:
     github repo -> settings -> webhook -> addwebhook
     copy URL & query parameter  from jenkins under Token section
         ex: http://<jenkins_url>:8080/generic-webhook-trigger/invoke?token=devopsshack123 
-    add above genetared URl in github payload, and conetnt type -> application/json 
+    add above genetared URl in github payload, and conetnt type -> application/json -> addwebhook
+    to check status -> clilck on webhooks -> recent deliveries shows tick mark 
 
-    ==============17:00======================
+    in jenkins console o/p it shows "generic cause" 
+
+
+    multi branch pipeline:
+    =========================
+    jobs -> multi branch pipeline -> branch source: git -> git repo details(https://github.com/jaiswaladi246/Boardgame.git) -> build configuration(mode: jenkinsfile) -> apply changes(before this check below steps, if pipeline has tools section) 
+
+        first time this job start executing all branches automatically, now we can configure github hook for multibranch pipeline with below steps 
+
+        for pipeline and multi branch pipeline jobs install plugins -> stage view, multi branch scan  webhook trigger 
+
+        for tools, add plugin for java  -> eclipe termuin installer 
+        after installing plugins configure inside tools section 
+        to add jdk 
+            tools -> JDk installtions -> Name: jdk17 -> selct install automatically -> adoptium.net -> select java version(jdk17)
+
+            maven -> name:3.6 -> install automatically from apache -> select version(3.6.1) 
+    
+    NOw go to job -> configure -> scan multi branch pipeline triggers under build configurations , selct scan by web hook -> trigger token(multibranch123) -> click on ? symbol and copy URl and modify it 
+        ex: http://<jenkins ip>:8080/multibranch-webhook-trigger/invoke?token=<value> (multibranch123)
+
+    above is payload url for multibranch pipeline
+    now go to github -> settings -> webhooks -> addwebhook -> add payload URl -> content type: application/json -> addwebhooks 
+
+    now modify code in main branch , it will trigger multi branch pipeline job automatically but only main branch pipeline  -> shows started  by indexing
+
+    similarly test othe branches 
+
+    ============ 30 ================
+
+
+    
+
+
+upstream & downstream jobs:
+==============================
+we can maintain two individual jobs CI and CD jobs as upsteam and downstream, once CI is completed automatically CD will start executing 
+here CD job is automatic depends on CI job as weel as it can be triggered manually
+
+
+
+
+
+    
