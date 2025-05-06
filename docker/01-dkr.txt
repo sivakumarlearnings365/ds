@@ -98,6 +98,13 @@ docker installtion:
 
 3)windows containers on linux -> its not possible as containers shares host os(linux), but in windows m/c with the hekp docker desktop app we can create containers of windows as well as linux but only one type of containers at a time, not both linux & windows containers at a time . 
 
+topics:
+-----------
+1 - vm vs cntrns
+2 - docker archi 
+3 - docker cmnds  
+
+
 
 
 

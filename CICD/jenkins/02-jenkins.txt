@@ -1,0 +1,24 @@
+webhook triggers:
+====================
+    ex: automating pielines,
+        when developer pushes code to feature branch of git repo, then pipeline starts executing automatically and performs comilation, test, build(artifcats), security check
+
+    configuration:
+    ------------------
+    install plugin -> generic webhook triggger(specific to pipeline) ,
+    now go to job -> trigger -> generic webhook trigger check it and now add post content parameters
+        variable - ref
+        expresiion - $.ref (json)
+        token & token credentials -> both are for authrization, token is visible which is not good
+            token credential -> add -> jenkins -> secret text -> secret(devopsshack123) -> id(token-webhook)
+        optional filter -> to specify the branch 
+            expresiion - refs/heads/dev 
+            text - $ref
+    above configuration is from jenkins side now need to do from github side:
+    ------------------------------------------------
+    github repo -> settings -> webhook -> addwebhook
+    copy URL & query parameter  from jenkins under Token section
+        ex: http://<jenkins_url>:8080/generic-webhook-trigger/invoke?token=devopsshack123 
+    add above genetared URl in github payload, and conetnt type -> application/json 
+
+    ==============17:00======================
