@@ -1,0 +1,59 @@
+CMD vs ENTRYPOINT:
+====================\
+    CMD:
+    -----
+    passing args
+    overridden
+        ex:
+            Dockerfile.cmdex
+                FROM alpine
+                CMD ["echo", "heloo from CMD"]
+
+            $ docker build -t cmdex -f Dockerfile.cmdex .
+            $ docker images 
+            $ docker run cmdex:latest  --> o/p heloo from CMD 
+            $ docker run cmdex:latest echo "override" --> o/p is override 
+        if there are multiple CMD in Dockerfile, only last one is going to be executed 
+
+
+    ENTRYPOINT;
+    ------------
+    main commands after container starts
+    can not be overrideen easily 
+    ex:
+        Dockerfilr.entry 
+            FROM alpine
+            ENTRYPOINT ["echo", "Hello from entry"]
+        $ docker build -t entex -f Dockerfile.entry .
+        $ docker run entex:latest --> o/p hello from entry 
+        $ docker run entex:latest echo "override" --> o/p hello from entry echo override 
+            here args will be appended not overridden 
+        to override entrypoint:
+        ---------------------------
+        $ docker run --entrypoint echo entex "override everything" --> now o.p is overrideeverything 
+
+    if both entry pont and CMD is used in same docker file then cmd is used as passing args to entrypoint 
+    ex:
+        Dockerfile.cmdent 
+            FROM alpine 
+            CMD ["heloo fom cmd,ent"]
+            ENTRYPOINT ["echo"]
+        $ docker build -t cmdent -f Dockerfile.cmdent .
+        $ docker run cmdent:latest -> o/p 
+
+
+in docker image each step is a layer and it wil be cached
+
+Simple Python Project:
+--------------------
+first we need to take image which has python and small in size 
+
+clone a project which has below files:
+    src, reuirements.txt, 
+
+
+============28==================================
+
+
+
+        

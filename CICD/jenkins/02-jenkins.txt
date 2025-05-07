@@ -50,16 +50,109 @@ webhook triggers:
 
     similarly test othe branches 
 
-    ============ 30 ================
-
-
     
-
-
 upstream & downstream jobs:
 ==============================
 we can maintain two individual jobs CI and CD jobs as upsteam and downstream, once CI is completed automatically CD will start executing 
 here CD job is automatic depends on CI job as weel as it can be triggered manually
+
+    configure:
+    =========
+    newjob -> CI(pipeline) -> discard old build(stragey: log rotation, 5) -> pipeline code:
+    one more newjob -> CD(pipeline) -> discard old build(stragey: log rotation, 5) -> pipeline 
+        now modify CI pipeline -> configure -> add post section after stages 
+        ex: 
+
+                pipeline {
+                    agent any
+                    
+                    tools {
+                        maven 'maven3.6'
+                        jdk 'jdk17'
+                    }
+
+                    stages {
+                        
+                        stage('Compile') {
+                            steps {
+                            sh 'mvn compile'
+                            }
+                        }
+                        stage('test') {
+                            steps {
+                                sh 'mvn test'
+                            }
+                        }
+                        stage('Package') {
+                            steps {
+                            sh 'mvn package'
+                            }
+                        }
+                        stage('Hello') {
+                            steps {
+                                echo 'Hello World'
+                            }
+                        }
+                    }
+
+                    post {
+                        success {
+                            build job: 'CD'
+                        }
+
+                        failure {
+                            build job: 'CD2'
+                        }
+                    }
+                }
+
+
+trigger on mail notification
+==============================
+     prerequisites for gmail notification:
+     ----------------
+     -> port 465 should be opening
+     -> APPpassword for gmail account
+     -> smtp server name for gmail(smtp.gmail.com)
+
+     APPPassword is token to send notification to jenkins, it will be generated only if 2FA is enabled on gmail account 
+
+     generating APPpassword:
+     -----------------------
+        copy below URLL in browser:
+            https://myaccount.google.com/apppasswords
+
+            enbale 2FA befor this cativity
+                App name(jenkins) -> i will generate password , copy that and go to jenkins 
+                jenkins -> manage jenkins -> system  -> extended emiual notofication(
+                    SMTP server: smtp.gmail.com
+                    SMTP port: 465
+                    advanced -> credentails -> jenkins
+                      usernamewithpassword:
+                        username: gmail account
+                        password: generated app password 
+                        id: mail-cred
+                    use ssl 
+
+                )
+
+                emiual notofication(
+                    SMTP server: smtp.gmail.com
+                    advanced: use smtp auth 
+                        username: mail id
+                        password: genered app password 
+                    use ssl 
+                    SMTP port: 465 
+                    REply_to-Adress: jenkins@devopsshack.com 
+                    test: test it by adding some other mail address and check
+                            from is : mail we have used in generating apppassword 
+                            reply-to: generally will get replies to this mail, instead of from sender mail 
+                            to: mail added in test configure 
+
+                )
+
+    for pipeline generate script using chat gpt for mail notification and add  under post section after stges
+
 
 
 
