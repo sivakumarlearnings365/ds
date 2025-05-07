@@ -151,10 +151,10 @@ trigger on mail notification
 
                 )
 
-    for pipeline generate script using chat gpt for mail notification and add  under post section after stges
+    for pipeline generate script using chat gpt for mail notification and add  under post section after stages
 
 
-
+===============58 ========================
 
 
 
