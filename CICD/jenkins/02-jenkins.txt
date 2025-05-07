@@ -72,10 +72,18 @@ here CD job is automatic depends on CI job as weel as it can be triggered manual
                     }
 
                     stages {
+
+                         stage('git checkout') {
+                            steps {
+                            giy branch: 'dev', url: 'https://github.com/jaiswaladi246/Boardgame.git'
+                            }
+                        }
                         
                         stage('Compile') {
                             steps {
-                            sh 'mvn compile'
+                                dir('path/to/folder') {  //ehere pom.xml exists
+                                    sh 'mvn compile'
+                                 }
                             }
                         }
                         stage('test') {
@@ -154,7 +162,27 @@ trigger on mail notification
     for pipeline generate script using chat gpt for mail notification and add  under post section after stages
 
 
-===============58 ========================
+==================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++
+====================================================
+1 - real time usage of multi branch pipeline"
+        if all the branches of that repo wnats the same events to trigger, then we can use this else if different branches has different properties like on different events they need to trigger then individual jobs 
+
+2 - jenkins pipeline common error:
+    137 error -> out of memory for very big pipelines/jobs 
+    403/401 -> credentails errors
+    git realted:
+    -------------
+    128 -> not provided credentails of git 
+    401 -> wrog cred of git 
+3 - security
+    for static analysis:
+        git lekas -> scans code of git repo for APIs, secrets, tokens...
+        trivy -> scans files for dependency vulnarabilities, kube yaml file configurations 
+        sonarqube -> issues exists with in source code like bugs, duplicates, vulnarabilities 
+        
+
+
 
 
 
