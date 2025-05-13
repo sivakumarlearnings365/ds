@@ -53,7 +53,7 @@ webhook triggers:
     
 upstream & downstream jobs:
 ==============================
-we can maintain two individual jobs CI and CD jobs as upsteam and downstream, once CI is completed automatically CD will start executing 
+we can maintain two individual jobs CI and CD jobs as upsteam and downstream, once if CI is completed then automatically CD will start executing 
 here CD job is automatic depends on CI job as weel as it can be triggered manually
 
     configure:
@@ -115,15 +115,18 @@ here CD job is automatic depends on CI job as weel as it can be triggered manual
                 }
 
 
-trigger on mail notification
+trigger mail notification
 ==============================
+    Jenkins doesn't send the email itself. Instead, it connects to an SMTP server (like Gmail, Outlook, or an internal mail server), which handles the actual delivery of the email. about status of jobs 
+
      prerequisites for gmail notification:
      ----------------
      -> port 465 should be opening
      -> APPpassword for gmail account
      -> smtp server name for gmail(smtp.gmail.com)
+            SMTP stands for Simple Mail Transfer Protocol. An SMTP server is a service that sends emails from one server (like Jenkins) to the recipient’s email inbox (like Gmail, Outlook, etc.).
 
-     APPPassword is token to send notification to jenkins, it will be generated only if 2FA is enabled on gmail account 
+     "App Password" is a special password that you generate from your email provider to allow Jenkins (or any external application) to access your email account securely, without using your main password.
 
      generating APPpassword:
      -----------------------
@@ -131,7 +134,7 @@ trigger on mail notification
             https://myaccount.google.com/apppasswords
 
             enbale 2FA befor this cativity
-                App name(jenkins) -> i will generate password , copy that and go to jenkins 
+                App name(jenkins) -> it will generate password , copy that and go to jenkins 
                 jenkins -> manage jenkins -> system  -> extended emiual notofication(
                     SMTP server: smtp.gmail.com
                     SMTP port: 465
