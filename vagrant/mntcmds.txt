@@ -1,0 +1,31 @@
+lsblk
+
+Launch fdisk to Create Partition
+    sudo fdisk /dev/sda
+            Inside fdisk, do the following:
+
+            Press n → New partition
+
+            Press p → Primary
+
+            Press 2 → Partition number
+
+            Press Enter → Accept default start
+
+            Press Enter → Accept default end (use all available space)
+
+            Press w → Write and exit
+
+            This creates /dev/sda2.
+
+Create Filesystem (ext4 example)
+            sudo mkfs.ext4 /dev/sda2
+Create Mount Point and Mount It
+            sudo mkdir -p /mnt/data
+            sudo mount /dev/sda2 /mnt/data
+Verify Mount
+        df -h
+(Optional): Mount Automatically on Boot
+    vim /etc/fstab
+        Add this line at the bottom:
+            /dev/sda2   /mnt/data   ext4    defaults   0 0
