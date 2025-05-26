@@ -1,0 +1,4 @@
+parameters:
+=============
+string, choice, boolean(conditions)
+

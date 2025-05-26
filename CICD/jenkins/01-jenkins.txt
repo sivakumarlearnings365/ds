@@ -12,6 +12,23 @@ Jenkins:
     1) java
 runs on port 8080
 
+    Tools Section (Manage Jenkins → Global Tool Configuration)
+    ======================================================
+    This is where you define tool installations used in your Jenkins jobs.
+        Examples: JDKs, Maven, Gradle, Git, SonarScanner, etc.
+    You specify:
+    Tool name (used in pipeline or freestyle jobs)
+
+     System Section (Manage Jenkins → Configure System)
+     ===================================================
+    This is where you configure global settings and behaviors for Jenkins and its plugins.
+    For plugins like SonarQube, this is where you configure:
+        SonarQube server URL
+        Authentication tokens
+        Webhooks
+
+    This is system-facing: It’s about how Jenkins integrates with external services globally.
+
 
 jenkins master-agent:
 ---------------------
@@ -19,6 +36,7 @@ even for jenkins agents java is required
 manage jenkins -> nodes -> new node -> name:agent-1, permanent agent -> remote root directory(create path in agent with proper permissions) -> launch methos: with ssh , for credentials create under secrets and add here
     
 if tools installed using plugins, they should be defined in pipeline to use them
+
 
 
 
